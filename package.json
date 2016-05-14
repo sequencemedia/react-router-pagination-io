@@ -1,7 +1,7 @@
 {
-  "name": "react-pagifier",
-  "version": "0.0.1",
-  "description": "React Pagifier",
+  "name": "react-router-pagination.io",
+  "version": "1.0.1",
+  "description": "React Router Pagination",
   "private": true,
   "main": "./app.js",
   "scripts": {
@@ -60,5 +60,6 @@
     "standard": "^7.0.1",
     "webpack": "^1.12.13",
     "webpack-stream": "^3.2.0"
-  }
+  },
+  "private": true
 }
