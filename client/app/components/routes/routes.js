@@ -11,4 +11,3 @@ export default (
     <Route path=':page' component={PaginatedPage} />
   </Route>
 )
-
