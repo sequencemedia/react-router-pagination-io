@@ -1,11 +1,11 @@
 {
   "name": "react-router-pagination.io",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Router Pagination",
   "private": true,
   "main": "./app.js",
   "scripts": {
-    "start": "node app",
+    "start": "NODE_ENV=production && node app",
     "build": "gulp",
     "dev": "npm run build"
   },
@@ -19,6 +19,7 @@
     "parser": "babel-eslint"
   },
   "dependencies": {
+    "nconf": "^0.8.4",
     "babel-runtime": "^6.6.1",
     "boom": "^3.1.2",
     "good": "^7.0.0",

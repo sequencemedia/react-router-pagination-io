@@ -1,5 +1,10 @@
+/* eslint-disable */
 
-	var Hapi = require('hapi'),
+	var path = require('path'),
+
+		nconf = require('nconf'),
+
+		Hapi = require('hapi'),
 		Good = require('good'),
 		Boom = require('boom'),
 		Joi = require('joi'),
@@ -7,22 +12,24 @@
 		inert = require('inert'),
 		vision = require('vision'),
 		hogan = require('hapi-hogan'),
-		path = require('path'),
-
-		server = new Hapi.Server(),
 
 		clientPath = path.resolve(__dirname, 'client'),
 		serverPath = path.resolve(__dirname, 'server'),
 		publicPath = path.resolve(__dirname, 'public'),
 		assetsPath = path.resolve(publicPath, 'assets'),
 
+		server = new Hapi.Server(),
+		config = require(path.resolve(serverPath, 'config'))(),
+
 		Renderer = require('react-routes-renderer').Renderer,
 		renderer = new Renderer(),
 		Routes = require(path.resolve(clientPath, 'app/components')).Routes;
 
+nconf.argv().env().defaults(config);
+
 	server.register(inert, function (e) {
 		if (e) throw e;
-		server.connection({ port: 5000 });
+		server.connection(nconf.get('server:connection'));
 		/*
 			Static Routes
 		*/
@@ -58,7 +65,6 @@
 				}
 			}
 		});
-
 		server.route({
 			path: '/assets/{path*}',
 			method: 'GET',

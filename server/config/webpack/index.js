@@ -1,13 +1,18 @@
+/* eslint-disable */
+
 var webpack = require('webpack'),
 	path = require('path'),
-	clientPath = path.resolve(__dirname, 'client'),
-	assetsPath = path.resolve(__dirname, 'public/assets');
+	processCwd = process.cwd(),
+	clientPath = path.resolve(processCwd, 'client'),
+	assetsPath = path.resolve(processCwd, 'public/assets');
 
 module.exports = {
-	context: __dirname,
+	context: processCwd,
 	devtool: 'source-map',
 	entry: {
-		index: [path.resolve(clientPath, 'src/app.js')]
+		index: [
+			path.resolve(clientPath, 'src/app.js')
+		]
 	},
 	output: {
 		path: path.resolve(assetsPath),
@@ -30,8 +35,17 @@ module.exports = {
 				],
 				loader: 'babel',
 				query: {
-					presets: ['es2015', 'stage-0', 'stage-1', 'react'],
-					plugins: ['transform-runtime', 'transform-class-properties', 'transform-object-rest-spread']
+					presets: [
+						'es2015',
+						'stage-0',
+						'stage-1',
+						'react'
+					],
+					plugins: [
+						'transform-runtime',
+						'transform-class-properties',
+						'transform-object-rest-spread'
+					]
 				}
 			}, {
 				test: /\.json$/,
@@ -40,18 +54,14 @@ module.exports = {
 		]
 	},
 	plugins: [
-		/*
-			"process.env": {
-				"NODE_ENV": "production"
-			}
-		*/
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify('production')
 			}
 		}),
 		new webpack.optimize.UglifyJsPlugin({
-			mangle: false, preserveComments: false
+			mangle: false,
+			preserveComments: false
 		}),
 		new webpack.ProvidePlugin({
 			'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
