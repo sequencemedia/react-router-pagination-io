@@ -1,2 +1,4 @@
-**/node_modules/*
-**/npm-debug.log
+**/v1/node_modules/*
+**/v1/npm-debug.log
+**/v2/node_modules/*
+**/v2/npm-debug.log
