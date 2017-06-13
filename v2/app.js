@@ -49,7 +49,7 @@ const good = {
 
 nconf.argv().env().defaults(config)
 
-  server.connection(nconf.get('server:connection'))
+  server.connection(nconf.get('server:v2:connection'))
 
   server.register([good, inert, vision], (e) => {
     if (e) throw e
