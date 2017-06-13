@@ -34,7 +34,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "3.0.5",
-    "react-router-pagination": "^1.1.1",
+    "react-router-pagination": "^1.2.0",
     "react-routes-renderer": "^1.2.7",
     "vision": "^4.1.1"
   },
