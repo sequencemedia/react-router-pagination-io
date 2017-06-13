@@ -1,124 +1,121 @@
 /* eslint-disable */
+require('babel-register')
 
-	var path = require('path'),
+const path = require('path')
 
-		nconf = require('nconf'),
+const nconf = require('nconf')
 
-		Hapi = require('hapi'),
-		Good = require('good'),
-		Boom = require('boom'),
+const Hapi = require('hapi')
+const Good = require('good')
+const Boom = require('boom')
 
-		inert = require('inert'),
-		vision = require('vision'),
-		hogan = require('hapi-hogan'),
+const inert = require('inert')
+const vision = require('vision')
+const hogan = require('hapi-hogan')
 
-		clientPath = path.resolve(__dirname, 'client'),
-		serverPath = path.resolve(__dirname, 'server'),
-		publicPath = path.resolve(__dirname, 'public'),
-		assetsPath = path.resolve(publicPath, 'assets'),
+const clientPath = path.resolve(__dirname, 'client')
+const serverPath = path.resolve(__dirname, 'server')
+const publicPath = path.resolve(__dirname, 'public')
+const assetsPath = path.resolve(publicPath, 'assets')
 
-		server = new Hapi.Server(),
-		config = require(path.resolve(serverPath, 'config'))(),
+const { Renderer } = require('react-routes-renderer')
+const { Routes } = require(path.resolve(clientPath, 'app/components'))
 
-		Renderer = require('react-routes-renderer').Renderer,
-		renderer = new Renderer(),
-		Routes = require(path.resolve(clientPath, 'app/components')).Routes;
+const config = require(path.resolve(serverPath, 'config'))()
+const server = new Hapi.Server()
 
-nconf.argv().env().defaults(config);
+const renderer = new Renderer()
 
-	server.register(inert, function (e) {
-		if (e) throw e;
-		server.connection(nconf.get('server:connection'));
-		/*
-			Static Routes
-		*/
-		server.route({
-			method: '*',
-			path: '/',
-			config: {
-				handler: function (request, reply) {
-					renderer.render(Routes, request.url.path)
-						.then(function (o) {
-							if (o.redirect) return reply.redirect(o.redirect.pathname + o.redirect.search);
-							reply.view('index', { title: 'React Paginator', react: o.rendered });
-						})
-						.catch(function (e) {
-							reply(e);
-						});
-				}
-			}
-		});
-		server.route({
-			method: '*',
-			path: '/{page}',
-			config: {
-				handler: function (request, reply) {
-					renderer.render(Routes, request.url.path)
-						.then(function (o) {
-							if (o.redirect) return reply.redirect(o.redirect.pathname + o.redirect.search);
-							reply.view('index', { title: 'React Paginator', react: o.rendered });
-						})
-						.catch(function (e) {
-							reply(e);
-						});
-				}
-			}
-		});
-		server.route({
-			path: '/assets/{path*}',
-			method: 'GET',
-			handler: {
-				directory: {
-					path: path.normalize(assetsPath),
-					listing: false,
-					index: false
-				}
-			}
-		});
-		server.log('info', 'Inert');
-	});
-	server.register(vision, function (e) {
-		if (e) throw e;
-		server.views({
-			relativeTo: __dirname,
-			path: path.resolve(serverPath, 'views'),
-			engines: {
-				html: {
-					module: hogan,
-					compileMode: 'sync',
-					compileOptions: {
-						partialsPath: path.resolve(serverPath, 'views/partials'),
-						isCached: true
-					}
-				}
-			}
-		});
-		server.log('info', 'Vision');
-	});
+const good = {
+  register: Good,
+  options: {
+    ops: {
+      interval: 1000
+    },
+    reporters: {
+      console: [{
+        module: 'good-squeeze',
+        name: 'Squeeze',
+        args: [{ log: '*', response: '*' }]
+      }, {
+        module: 'good-console'
+      }, 'stdout']
+    }
+  }
+}
 
-	server.register({
-		register: Good,
-		options: {
-			ops: {
-				interval: 1000
-			},
-			reporters: {
-				console: [{
-					module: 'good-squeeze',
-					name: 'Squeeze',
-					args: [{ log: '*', response: '*' }]
-				}, {
-					module: 'good-console'
-				}, 'stdout']
-			}
-		}
-	}, function (e) {
-		if (e) {
-			console.log('Good', e);
-			process.exit();
-		}
-	});
+nconf.argv().env().defaults(config)
 
-	server.start(function () {
-		server.log('info', server.info.uri);
-	});
+  server.connection(nconf.get('server:connection'))
+
+  server.register([good, inert, vision], (e) => {
+    if (e) throw e
+
+    server.views({
+      relativeTo: __dirname,
+      path: path.resolve(serverPath, 'views'),
+      engines: {
+        html: {
+          module: hogan,
+          compileMode: 'sync',
+          compileOptions: {
+            partialsPath: path.resolve(serverPath, 'views/partials'),
+            isCached: true
+          }
+        }
+      }
+    })
+
+    server.route({
+      path: '/assets/{path*}',
+      method: 'GET',
+      handler: {
+        directory: {
+          path: path.normalize(assetsPath),
+          listing: false,
+          index: false
+        }
+      }
+    })
+    server.route({
+      method: '*',
+      path: '/',
+      config: {
+        handler: function ({ url: { path } }, reply) {
+          console.log('path', renderer.render)
+          renderer.render(Routes, path)
+            .then(({ rendered: react }) => {
+              reply.view('index', { title: 'React Paginator', react });
+            })
+            .catch(reply)
+        }
+      }
+    })
+    server.route({
+      method: '*',
+      path: '/{page}',
+      config: {
+        handler: function ({ url: { path } }, reply) {
+          console.log('path', renderer.render)
+          renderer.render(Routes, path)
+            .then(({ rendered: react }) => {
+              reply.view('index', { title: 'React Paginator', react });
+            })
+            .catch(reply)
+        }
+      }
+    })
+    server.route({
+      method: 'GET',
+      path: '/favicon.ico',
+      config: {
+        handler: (request, reply) => {
+          reply(Boom.notFound())
+        }
+      }
+    })
+  })
+
+  server.start(() => {
+    server.log('info', `[React.Router.Pagination] ${server.info.uri}`)
+  })

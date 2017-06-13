@@ -1,19 +1,18 @@
+/* eslint react/prop-types: 0 */
 import React from 'react'
 import { Link } from 'react-router'
-import Pagination, { pagination } from 'react-router-pagination'
+import Pagination, {
+  pagination
+} from 'react-router-pagination'
 
-export default (props) => {
-  const {
-    page
-  } = props.params
-
+export default ({ params: { page } }) => {
   const totalPages = pagination.calculateTotalPages(120, 10)
   const pageNumber = pagination.calculatePageNumber(page, totalPages)
   const spread = 5
 
   return (
     <section>
-    <h1>Pagination (Page {pageNumber})</h1>
+      <h1>Pagination (Page {pageNumber})</h1>
       <Pagination
         totalPages={totalPages}
         pageNumber={pageNumber}
