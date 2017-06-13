@@ -1,16 +1,16 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const processCwd = process.cwd()
-const clientPath = path.resolve(processCwd, 'client')
-const assetsPath = path.resolve(processCwd, 'public/assets')
+const modulePath = process.cwd()
+const clientPath = path.resolve(modulePath, 'client')
+const assetsPath = path.resolve(modulePath, 'public/assets')
 
 const {
   NODE_ENV
 } = process.env
 
 module.exports = {
-  context: processCwd,
+  context: modulePath,
   devtool: 'source-map',
   entry: {
     index: [

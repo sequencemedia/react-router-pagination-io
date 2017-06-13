@@ -1,4 +1,3 @@
-/* eslint-disable */
 require('babel-register')
 
 const path = require('path')
@@ -30,7 +29,7 @@ const {
 } = require('react-routes-renderer')
 const {
   Routes
-} = require(path.resolve(clientPath, 'app/components'))
+} = require(path.join(clientPath, 'app/components'))
 
 const server = new Hapi.Server()
 
@@ -40,74 +39,73 @@ const TITLE = 'React Router Pagination'
 
 nconf.argv().env().defaults(config)
 
-  server.connection(nconf.get('server:v1:connection'))
+server.connection(nconf.get('server:v1:connection'))
 
-  server.register([good, inert, vision], (e) => {
-    if (e) throw e
+server.register([good, inert, vision], (e) => {
+  if (e) throw e
 
-    server.views({
-      relativeTo: modulePath,
-      path: path.resolve(serverPath, 'views'),
-      engines: {
-        html: {
-          module: hogan,
-          compileMode: 'sync',
-          compileOptions: {
-            partialsPath: path.resolve(serverPath, 'views/partials'),
-            isCached: true
-          }
+  server.views({
+    relativeTo: modulePath,
+    path: path.resolve(serverPath, 'views'),
+    engines: {
+      html: {
+        module: hogan,
+        compileMode: 'sync',
+        compileOptions: {
+          isCached: true
         }
       }
-    })
-
-    server.route({
-      path: '/assets/{path*}',
-      method: 'GET',
-      handler: {
-        directory: {
-          path: path.normalize(assetsPath),
-          listing: false,
-          index: false
-        }
-      }
-    })
-    server.route({
-      method: '*',
-      path: '/',
-      config: {
-        handler: ({ url: { path } }, reply) => {
-          renderer.render(Routes, path)
-            .then(({ rendered: react }) => {
-              reply.view('index', { title: TITLE, react });
-            })
-            .catch(reply)
-        }
-      }
-    })
-    server.route({
-      method: '*',
-      path: '/{page}',
-      config: {
-        handler: ({ url: { path } }, reply) => {
-          renderer.render(Routes, path)
-            .then(({ rendered: react }) => {
-              reply.view('index', { title: TITLE, react });
-            })
-            .catch(reply)
-        }
-      }
-    })
-    server.route({
-      method: 'GET',
-      path: '/favicon.ico',
-      config: {
-        handler: (request, reply) => {
-          reply(Boom.notFound())
-        }
-      }
-    })
+    }
   })
 
-  server.start(() => {
-    server.log('info', `[React.Router.Pagination/v1] ${server.info.uri}`)
+  server.route({
+    path: '/assets/{path*}',
+    method: 'GET',
+    handler: {
+      directory: {
+        path: path.normalize(assetsPath),
+        listing: false,
+        index: false
+      }
+    }
   })
+  server.route({
+    method: '*',
+    path: '/',
+    config: {
+      handler: ({ url: { path } }, reply) => {
+        renderer.render(Routes, path)
+          .then(({ rendered: react }) => {
+            reply.view('index', { title: TITLE, react });
+          })
+          .catch(reply)
+      }
+    }
+  })
+  server.route({
+    method: '*',
+    path: '/{page}',
+    config: {
+      handler: ({ url: { path } }, reply) => {
+        renderer.render(Routes, path)
+          .then(({ rendered: react }) => {
+            reply.view('index', { title: TITLE, react });
+          })
+          .catch(reply)
+      }
+    }
+  })
+  server.route({
+    method: 'GET',
+    path: '/favicon.ico',
+    config: {
+      handler: (request, reply) => {
+        reply(Boom.notFound())
+      }
+    }
+  })
+})
+
+server.start(() => {
+  server.log('info', `[React.Router.Pagination/v1] ${server.info.uri}`)
+})

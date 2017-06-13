@@ -1,20 +1,18 @@
 const path = require('path')
 
-const processCwd = process.cwd()
-const clientPath = path.resolve(processCwd, 'client')
-const serverPath = path.resolve(processCwd, 'server')
-const publicPath = path.resolve(processCwd, 'public')
+const modulePath = process.cwd()
+const clientPath = path.resolve(modulePath, 'client')
+const serverPath = path.resolve(modulePath, 'server')
+const publicPath = path.resolve(modulePath, 'public')
 const configPath = path.resolve(serverPath, 'config')
 
 module.exports = {
   public: {
-    app: [
-      path.join(publicPath, 'assets/js')
-    ]
+    app: path.join(publicPath, 'assets/js/app')
   },
   client: {
     app: [
-      path.resolve(clientPath, '**/*.js')
+      path.join(clientPath, '**/*.js')
     ]
   },
   webpack: {

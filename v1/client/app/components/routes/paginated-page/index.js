@@ -1,6 +1,8 @@
 /* eslint react/prop-types: 0 */
 import React from 'react'
-import { Link } from 'react-router'
+import {
+  Link
+} from 'react-router'
 import Pagination, {
   pagination
 } from 'react-router-pagination'

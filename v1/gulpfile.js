@@ -3,7 +3,7 @@ const path = require('path')
 const modulePath = process.cwd()
 const serverPath = path.resolve(modulePath, 'server')
 const configPath = path.resolve(serverPath, 'config')
-const config = require(path.join(configPath), 'gulp')
+const config = require(path.join(configPath, 'gulp'))
 
 const gulp = require('gulp')
 const webpack = require('webpack-stream')

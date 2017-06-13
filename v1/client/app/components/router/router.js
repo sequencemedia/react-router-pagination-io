@@ -6,7 +6,7 @@ import {
 
 import Routes from '../routes/routes'
 
-export default () => (
+export default () => ( // HAS a function
   <Router history={browserHistory}>
     {Routes}
   </Router>

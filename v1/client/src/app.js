@@ -7,6 +7,7 @@ import {
 const App = (
   <Router />
 )
+
 const app = document.getElementById('app')
 
 ReactDOM.render(
