@@ -82,10 +82,9 @@ nconf.argv().env().defaults(config)
       path: '/',
       config: {
         handler: function ({ url: { path } }, reply) {
-          console.log('path', renderer.render)
           renderer.render(Routes, path)
             .then(({ rendered: react }) => {
-              reply.view('index', { title: 'React Paginator', react });
+              reply.view('index', { title: 'React Router Pagination', react });
             })
             .catch(reply)
         }
@@ -96,10 +95,9 @@ nconf.argv().env().defaults(config)
       path: '/{page}',
       config: {
         handler: function ({ url: { path } }, reply) {
-          console.log('path', renderer.render)
           renderer.render(Routes, path)
             .then(({ rendered: react }) => {
-              reply.view('index', { title: 'React Paginator', react });
+              reply.view('index', { title: 'React Router Pagination', react });
             })
             .catch(reply)
         }
