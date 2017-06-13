@@ -6,46 +6,42 @@ const path = require('path')
 const nconf = require('nconf')
 
 const Hapi = require('hapi')
-const Good = require('good')
 const Boom = require('boom')
 
 const inert = require('inert')
 const vision = require('vision')
 const hogan = require('hapi-hogan')
 
-const clientPath = path.resolve(__dirname, 'client')
-const serverPath = path.resolve(__dirname, 'server')
-const publicPath = path.resolve(__dirname, 'public')
+const modulePath = process.cwd()
+
+const clientPath = path.resolve(modulePath, 'client')
+const serverPath = path.resolve(modulePath, 'server')
+const configPath = path.resolve(serverPath, 'config')
+const publicPath = path.resolve(modulePath, 'public')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const { configureStore } = require(path.resolve(clientPath, 'app/store'))
-const { Renderer } = require('redux-routes-renderer')
-const { Routes } = require(path.resolve(clientPath, 'app/components'))
-
 const config = require(path.resolve(serverPath, 'config'))()
+
+const {
+  good
+} = require(path.join(configPath, 'good'))
+const {
+  configureStore
+} = require(path.join(clientPath, 'app/store'))
+const {
+  Renderer
+} = require('redux-routes-renderer')
+const {
+  Routes
+} = require(path.join(clientPath, 'app/components'))
+
 const server = new Hapi.Server()
 
 const renderer = new Renderer()
 
 const store = configureStore()
 
-const good = {
-  register: Good,
-  options: {
-    ops: {
-      interval: 1000
-    },
-    reporters: {
-      console: [{
-        module: 'good-squeeze',
-        name: 'Squeeze',
-        args: [{ log: '*', response: '*' }]
-      }, {
-        module: 'good-console'
-      }, 'stdout']
-    }
-  }
-}
+const TITLE = 'React Router Pagination'
 
 nconf.argv().env().defaults(config)
 
@@ -55,7 +51,7 @@ nconf.argv().env().defaults(config)
     if (e) throw e
 
     server.views({
-      relativeTo: __dirname,
+      relativeTo: modulePath,
       path: path.resolve(serverPath, 'views'),
       engines: {
         html: {
@@ -84,10 +80,10 @@ nconf.argv().env().defaults(config)
       method: '*',
       path: '/',
       config: {
-        handler: function ({ url: { path } }, reply) {
+        handler: ({ url: { path } }, reply) => {
           renderer.render(store, Routes, path)
-            .then(({ rendered, state }) => {
-              reply.view('index', { title: 'React Router Pagination', react: rendered, state: JSON.stringify(state) })
+            .then(({ rendered: react, state }) => {
+              reply.view('index', { title: TITLE, react, state: JSON.stringify(state) })
             })
             .catch(reply)
         }
@@ -97,10 +93,10 @@ nconf.argv().env().defaults(config)
       method: '*',
       path: '/{page}',
       config: {
-        handler: function ({ url: { path } }, reply) {
+        handler: ({ url: { path } }, reply) => {
           renderer.render(store, Routes, path)
-            .then(({ rendered, state }) => {
-              reply.view('index', { title: 'React Router Pagination', react: rendered, state: JSON.stringify(state) })
+            .then(({ rendered: react, state }) => {
+              reply.view('index', { title: TITLE, react, state: JSON.stringify(state) })
             })
             .catch(reply)
         }
@@ -110,7 +106,7 @@ nconf.argv().env().defaults(config)
       method: '*',
       path: '/api/{page}',
       config: {
-        handler: function ({ params: { page } }, reply) {
+        handler: ({ params: { page } }, reply) => {
           reply({ page })
         }
       }
@@ -127,5 +123,5 @@ nconf.argv().env().defaults(config)
   })
 
   server.start(() => {
-    server.log('info', `[React.Router.Pagination] ${server.info.uri}`)
+    server.log('info', `[React.Router.Pagination/v2] ${server.info.uri}`)
   })

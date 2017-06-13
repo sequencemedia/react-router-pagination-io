@@ -1,2 +1,1 @@
-
-export { request } from './actions'
+export request from 'axios'

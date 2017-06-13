@@ -10,7 +10,7 @@ import Pagination, {
   pagination
 } from 'react-router-pagination'
 
-import * as PaginatedPageActions from '../../../actions/PaginatedPageActions'
+import * as PaginatedPageActions from '../../../actions/paginated-page-actions'
 
 class PaginatedPage extends React.Component {
   componentWillMount () {
