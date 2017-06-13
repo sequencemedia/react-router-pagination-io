@@ -1,20 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import Pagination, { pagination } from 'react-router-pagination'
+import PropTypes from 'prop-types'
+import {
+  connect
+} from 'react-redux'
+import {
+  Link
+} from 'react-router'
+import Pagination, {
+  pagination
+} from 'react-router-pagination'
 
 import * as PaginatedPageActions from '../../../actions/PaginatedPageActions'
 
 class PaginatedPage extends React.Component {
-
   componentWillMount () {
     const {
-      paginatedPage,
+      paginatedPage
+    } = this.props
+
+    if (paginatedPage.page) return
+
+    const {
       dispatch,
       params
     } = this.props
 
-    if (paginatedPage.page) return
     dispatch(PaginatedPageActions.getPage(params))
   }
 
@@ -53,13 +63,30 @@ class PaginatedPage extends React.Component {
       </section>
     )
   }
-
 }
 
-PaginatedPage.needs = [
-  PaginatedPageActions.getPage
-]
+PaginatedPage.propTypes = {
+  paginatedPage: PropTypes.shape({
+    page: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }),
+  params: PropTypes.shape({
+    page: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }),
+  dispatch: PropTypes.func
+}
+
+PaginatedPage.defaultProps = {
+  paginatedPage: {},
+  params: {},
+  dispatch: () => {}
+}
 
 export default connect(
-  (state) => ({ paginatedPage: state.paginatedPage })
+  ({ paginatedPage }) => ({ paginatedPage })
 )(PaginatedPage)

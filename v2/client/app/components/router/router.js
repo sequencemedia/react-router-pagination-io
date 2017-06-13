@@ -1,9 +1,12 @@
 import React from 'react'
-import { Router, browserHistory } from 'react-router'
+import {
+  Router,
+  browserHistory
+} from 'react-router'
 
 import Routes from '../routes/routes'
 
-export default () => (
+export default (
   <Router history={browserHistory}>
     {Routes}
   </Router>

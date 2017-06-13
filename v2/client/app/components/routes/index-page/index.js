@@ -8,6 +8,7 @@ export default () => (
       totalPages={12}
       pageNumber={1}
       spread={5}
+      format='center'
     />
   </section>
 )

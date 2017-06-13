@@ -1,2 +1,1 @@
-require('babel-register')({})
-module.exports = require('./components')
+require('babel-register')

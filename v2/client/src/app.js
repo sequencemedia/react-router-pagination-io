@@ -6,9 +6,15 @@ import { configureStore } from '../app/store'
 
 const store = configureStore(window.initialState)
 
-ReactDOM.render(
+const App = (
   <Provider store={store}>
-    <Router />
-  </Provider>,
-  document.getElementById('app')
+    {Router}
+  </Provider>
+)
+
+const app = document.getElementById('app')
+
+ReactDOM.render(
+  App,
+  app
 )

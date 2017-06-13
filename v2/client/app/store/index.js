@@ -1,2 +1,2 @@
-require('babel-register')({})
-module.exports = require('./store')
+
+export { configureStore } from './store'
