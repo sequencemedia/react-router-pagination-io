@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import {
   Router
 } from '../app/components'
-import { 
-  Provider 
+import {
+  Provider
 } from 'react-redux'
-import { 
+import {
   configureStore
 } from '../app/store'
 

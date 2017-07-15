@@ -40,9 +40,9 @@ const renderer = new Renderer()
 
 const store = configureStore()
 
-const TITLE = 'React Router Pagination'
-
-nconf.argv().env().defaults(config)
+nconf
+  .argv().env()
+  .defaults(config)
 
 server.connection(nconf.get('server:v2:connection'))
 
@@ -63,61 +63,67 @@ server.register([good, inert, vision], (e) => {
     }
   })
 
-  server.route({
-    path: '/assets/{path*}',
-    method: 'GET',
-    handler: {
-      directory: {
-        path: path.normalize(assetsPath),
-        listing: false,
-        index: false
+  server.route([
+    {
+      path: '/assets/{path*}',
+      method: 'GET',
+      handler: {
+        directory: {
+          path: path.normalize(assetsPath),
+          listing: false,
+          index: false
+        }
+      }
+    }, {
+      method: '*',
+      path: '/',
+      config: {
+        handler: ({ url: { path } }, reply) => {
+
+          console.log(store)
+          console.log(Routes)
+          console.log(path)
+
+          renderer.render(store, Routes, path)
+            .then(({ rendered: react, state }) => {
+              reply.view('index', { react, state: JSON.stringify(state) })
+            })
+            .catch((e) => {
+              console.log(e)
+              reply(e)
+            })
+        }
+      }
+    }, {
+      method: '*',
+      path: '/{page}',
+      config: {
+        handler: ({ url: { path } }, reply) => {
+          renderer.render(store, Routes, path)
+            .then(({ rendered: react, state }) => {
+              reply.view('index', { react, state: JSON.stringify(state) })
+            })
+            .catch(reply)
+        }
+      }
+    }, {
+      method: '*',
+      path: '/api/{page}',
+      config: {
+        handler: ({ params: { page } }, reply) => {
+          reply({ page })
+        }
+      }
+    }, {
+      method: 'GET',
+      path: '/favicon.ico',
+      config: {
+        handler: (request, reply) => {
+          reply(Boom.notFound())
+        }
       }
     }
-  })
-  server.route({
-    method: '*',
-    path: '/',
-    config: {
-      handler: ({ url: { path } }, reply) => {
-        renderer.render(store, Routes, path)
-          .then(({ rendered: react, state }) => {
-            reply.view('index', { title: TITLE, react, state: JSON.stringify(state) })
-          })
-          .catch(reply)
-      }
-    }
-  })
-  server.route({
-    method: '*',
-    path: '/{page}',
-    config: {
-      handler: ({ url: { path } }, reply) => {
-        renderer.render(store, Routes, path)
-          .then(({ rendered: react, state }) => {
-            reply.view('index', { title: TITLE, react, state: JSON.stringify(state) })
-          })
-          .catch(reply)
-      }
-    }
-  })
-  server.route({
-    method: '*',
-    path: '/api/{page}',
-    config: {
-      handler: ({ params: { page } }, reply) => {
-        reply({ page })
-      }
-    }
-  })
-  server.route({
-    method: 'GET',
-    path: '/favicon.ico',
-    config: {
-      handler: (request, reply) => {
-        reply(Boom.notFound())
-      }
-    }
-  })
+  ])
 })
 
 server.start(() => {

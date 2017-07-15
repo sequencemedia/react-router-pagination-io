@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   connect
@@ -6,13 +6,11 @@ import {
 import {
   Link
 } from 'react-router'
-import Pagination, {
-  pagination
-} from 'react-router-pagination'
+import Pagination from 'react-router-pagination'
 
 import * as PaginatedPageActions from '../../../actions/paginated-page-actions'
 
-class PaginatedPage extends React.Component {
+class PaginatedPage extends Component {
   componentWillMount () {
     const {
       paginatedPage
@@ -36,8 +34,8 @@ class PaginatedPage extends React.Component {
       params
     } = this.props
 
-    const totalPages = pagination.calculateTotalPages(120, 10)
-    const pageNumber = pagination.calculatePageNumber(params.page, totalPages)
+    const totalPages = Pagination.calculateTotalPages(120, 10)
+    const pageNumber = Pagination.calculatePageNumber(params.page, totalPages)
     const spread = 5
 
     return (

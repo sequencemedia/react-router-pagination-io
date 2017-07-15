@@ -3,13 +3,11 @@ import React from 'react'
 import {
   Link
 } from 'react-router'
-import Pagination, {
-  pagination
-} from 'react-router-pagination'
+import Pagination from 'react-router-pagination'
 
 export default ({ params: { page } }) => {
-  const totalPages = pagination.calculateTotalPages(120, 10)
-  const pageNumber = pagination.calculatePageNumber(page, totalPages)
+  const totalPages = Pagination.calculateTotalPages(120, 10)
+  const pageNumber = Pagination.calculatePageNumber(page, totalPages)
   const spread = 5
 
   return (

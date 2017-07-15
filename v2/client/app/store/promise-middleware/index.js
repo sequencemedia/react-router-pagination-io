@@ -1,0 +1,27 @@
+const promiseMiddleware = () => (next) => (action) => {
+  const { promise, type, ...rest } = action
+
+  if (!promise) {
+    return next(action)
+  }
+
+  const SUCCESS = type
+  const REQUEST = type + '_REQUEST'
+  const FAILURE = type + '_FAILURE'
+
+  next({ ...rest, type: REQUEST })
+
+  return promise
+    .then((r) => {
+      next({ ...rest, r, type: SUCCESS })
+
+      return true
+    })
+    .catch((e) => {
+      next({ ...rest, e, type: FAILURE })
+
+      return false
+    })
+}
+
+export default promiseMiddleware

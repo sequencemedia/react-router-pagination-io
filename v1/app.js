@@ -35,9 +35,9 @@ const server = new Hapi.Server()
 
 const renderer = new Renderer()
 
-const TITLE = 'React Router Pagination'
-
-nconf.argv().env().defaults(config)
+nconf
+  .argv().env()
+  .defaults(config)
 
 server.connection(nconf.get('server:v1:connection'))
 
@@ -58,52 +58,51 @@ server.register([good, inert, vision], (e) => {
     }
   })
 
-  server.route({
-    path: '/assets/{path*}',
-    method: 'GET',
-    handler: {
-      directory: {
-        path: path.normalize(assetsPath),
-        listing: false,
-        index: false
+  server.route([
+    {
+      path: '/assets/{path*}',
+      method: 'GET',
+      handler: {
+        directory: {
+          path: path.normalize(assetsPath),
+          listing: false,
+          index: false
+        }
+      }
+    }, {
+      method: '*',
+      path: '/',
+      config: {
+        handler: ({ url: { path } }, reply) => {
+          renderer.render(Routes, path)
+            .then(({ rendered: react }) => {
+              reply.view('index', { react })
+            })
+            .catch(reply)
+        }
+      }
+    }, {
+      method: '*',
+      path: '/{page}',
+      config: {
+        handler: ({ url: { path } }, reply) => {
+          renderer.render(Routes, path)
+            .then(({ rendered: react }) => {
+              reply.view('index', { react })
+            })
+            .catch(reply)
+        }
+      }
+    }, {
+      method: 'GET',
+      path: '/favicon.ico',
+      config: {
+        handler: (request, reply) => {
+          reply(Boom.notFound())
+        }
       }
     }
-  })
-  server.route({
-    method: '*',
-    path: '/',
-    config: {
-      handler: ({ url: { path } }, reply) => {
-        renderer.render(Routes, path)
-          .then(({ rendered: react }) => {
-            reply.view('index', { title: TITLE, react });
-          })
-          .catch(reply)
-      }
-    }
-  })
-  server.route({
-    method: '*',
-    path: '/{page}',
-    config: {
-      handler: ({ url: { path } }, reply) => {
-        renderer.render(Routes, path)
-          .then(({ rendered: react }) => {
-            reply.view('index', { title: TITLE, react });
-          })
-          .catch(reply)
-      }
-    }
-  })
-  server.route({
-    method: 'GET',
-    path: '/favicon.ico',
-    config: {
-      handler: (request, reply) => {
-        reply(Boom.notFound())
-      }
-    }
-  })
+  ])
 })
 
 server.start(() => {
