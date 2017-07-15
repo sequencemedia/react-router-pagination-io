@@ -79,19 +79,11 @@ server.register([good, inert, vision], (e) => {
       path: '/',
       config: {
         handler: ({ url: { path } }, reply) => {
-
-          console.log(store)
-          console.log(Routes)
-          console.log(path)
-
           renderer.render(store, Routes, path)
             .then(({ rendered: react, state }) => {
               reply.view('index', { react, state: JSON.stringify(state) })
             })
-            .catch((e) => {
-              console.log(e)
-              reply(e)
-            })
+            .catch(reply)
         }
       }
     }, {
