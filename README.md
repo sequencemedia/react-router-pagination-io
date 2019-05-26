@@ -1,4 +1,6 @@
-# React.Router.Pagination
+# react-router-pagination-io
+
+An example implementation of [React Router Pagination](https://github.com/sequencemedia/react-router-pagination).
 
 Compatible with `React Router 3`.
 
