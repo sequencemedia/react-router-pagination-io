@@ -4,23 +4,15 @@ module.exports = () => {
     case 'production':
       return {
         server: {
-          v1: {
-            connection: {
-              host: 'localhost',
-              port: process.env.PORT
-            }
-          }
+          host: 'localhost',
+          port: process.env.PORT
         }
       }
     default:
       return {
         server: {
-          v1: {
-            connection: {
-              host: 'localhost',
-              port: 5001
-            }
-          }
+          host: 'localhost',
+          port: 5001
         }
       }
   }

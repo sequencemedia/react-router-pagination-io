@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {
   Router
-} from '../app/components'
+} from './app/components'
 
 const App = (
   <Router />
@@ -10,7 +10,7 @@ const App = (
 
 const app = document.getElementById('app')
 
-ReactDOM.render(
+ReactDOM.hydrate(
   App,
   app
 )

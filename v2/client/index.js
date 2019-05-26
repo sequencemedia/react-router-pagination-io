@@ -1,16 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-  Router
-} from '../app/components'
+
 import {
   Provider
 } from 'react-redux'
+
+import {
+  Router
+} from './app/components'
+
 import {
   configureStore
-} from '../app/store'
+} from './app/store'
 
-const store = configureStore(window.initialState)
+const state = JSON.parse(document.getElementById('initial-state').textContent)
+const store = configureStore(state)
 
 const App = (
   <Provider store={store}>
@@ -20,7 +24,7 @@ const App = (
 
 const app = document.getElementById('app')
 
-ReactDOM.render(
+ReactDOM.hydrate(
   App,
   app
 )

@@ -1,52 +1,63 @@
-require('babel-register')
+require('@babel/register')
 
 const path = require('path')
 
 const nconf = require('nconf')
 
-const Hapi = require('hapi')
-const Boom = require('boom')
+const Hapi = require('@hapi/hapi')
+const Boom = require('@hapi/boom')
+const inert = require('@hapi/inert')
+const vision = require('@hapi/vision')
 
-const inert = require('inert')
-const vision = require('vision')
 const hogan = require('hapi-hogan')
 
 const modulePath = process.cwd()
-
 const clientPath = path.resolve(modulePath, 'client')
 const serverPath = path.resolve(modulePath, 'server')
 const publicPath = path.resolve(modulePath, 'public')
 const configPath = path.resolve(serverPath, 'config')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const config = require(path.join(configPath))()
+const config = require(configPath)()
 
 const {
   good
 } = require(path.join(configPath, 'good'))
+
 const {
   Renderer
 } = require('react-routes-renderer')
+
 const {
   Routes
 } = require(path.join(clientPath, 'app/components'))
 
-const server = new Hapi.Server()
+const badImplementation = (e) => {
+  console.error(e)
 
-const renderer = new Renderer()
+  return Boom.badImplementation()
+}
 
 nconf
   .argv().env()
   .defaults(config)
 
-server.connection(nconf.get('server:v1:connection'))
+async function start ({ host = 'localhost', port = 5000 }) {
+  const server = Hapi.server({ host, port })
 
-server.register([good, inert, vision], (e) => {
-  if (e) throw e
+  const renderer = new Renderer()
+
+  const handler = ({ url: { pathname = '/' } }, h) => (
+    renderer.render(Routes, pathname)
+      .then(({ rendered: app }) => h.view('index', { app }))
+      .catch(badImplementation)
+  )
+
+  await server.register([good, inert, vision])
 
   server.views({
     relativeTo: modulePath,
-    path: path.resolve(serverPath, 'views'),
+    path: path.join(serverPath, 'views'),
     engines: {
       html: {
         module: hogan,
@@ -72,39 +83,17 @@ server.register([good, inert, vision], (e) => {
     }, {
       method: '*',
       path: '/',
-      config: {
-        handler: ({ url: { path } }, reply) => {
-          renderer.render(Routes, path)
-            .then(({ rendered: react }) => {
-              reply.view('index', { react })
-            })
-            .catch(reply)
-        }
-      }
+      handler
     }, {
       method: '*',
       path: '/{page}',
-      config: {
-        handler: ({ url: { path } }, reply) => {
-          renderer.render(Routes, path)
-            .then(({ rendered: react }) => {
-              reply.view('index', { react })
-            })
-            .catch(reply)
-        }
-      }
-    }, {
-      method: 'GET',
-      path: '/favicon.ico',
-      config: {
-        handler: (request, reply) => {
-          reply(Boom.notFound())
-        }
-      }
+      handler
     }
   ])
-})
 
-server.start(() => {
-  server.log('info', `[React.Router.Pagination/v1] ${server.info.uri}`)
-})
+  await server.start()
+
+  console.log(`\nreact-router-pagination [${server.info.uri}]\n`)
+}
+
+start(nconf.get('server'))

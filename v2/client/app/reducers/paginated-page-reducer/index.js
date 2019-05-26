@@ -1,10 +1,7 @@
 import {
   GET_PAGE
-} from '../../actions/paginated-page-actions'
+} from 'react-router-pagination-io/client/app/actions/paginated-page-actions'
 
-/**
- * Header Reducers
- */
 export default function paginatedPageReducer (state = {}, { type, r: { data } = {} } = {}) {
   switch (type) {
     case GET_PAGE:

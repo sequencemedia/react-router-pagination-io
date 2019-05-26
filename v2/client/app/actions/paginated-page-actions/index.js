@@ -3,7 +3,7 @@
  */
 import {
   request
-} from '../../actions'
+} from 'react-router-pagination-io/client/app/actions'
 
 /**
  * Action Types

@@ -8,34 +8,18 @@ import {
 } from 'react-router'
 import Pagination from 'react-router-pagination'
 
-import * as PaginatedPageActions from '../../../actions/paginated-page-actions'
+import * as PaginatedPageActions from 'react-router-pagination-io/client/app/actions/paginated-page-actions'
 
 class PaginatedPage extends Component {
-  componentWillMount () {
-    const {
-      paginatedPage
-    } = this.props
-
-    if (paginatedPage.page) return
-
-    const {
-      dispatch,
-      params
-    } = this.props
-
-    dispatch(PaginatedPageActions.getPage(params))
-  }
-
   handleClick = (page) => this.props.dispatch(PaginatedPageActions.getPage({ page }))
 
   render () {
     const {
-      paginatedPage,
-      params
+      paginatedPage
     } = this.props
 
     const totalPages = Pagination.calculateTotalPages(120, 10)
-    const pageNumber = Pagination.calculatePageNumber(params.page, totalPages)
+    const pageNumber = Pagination.calculatePageNumber(paginatedPage.page, totalPages)
     const spread = 5
 
     return (
@@ -50,13 +34,11 @@ class PaginatedPage extends Component {
         />
         <nav>
           <p>Return to the <Link to='/'>index page</Link>.</p>
-          {(() => {
-            if (paginatedPage.page) {
-              return (
-                <p>Redux has state for page {paginatedPage.page}.</p>
-              )
+          {do {
+            if (pageNumber) {
+              <p>Redux has state for page {pageNumber}.</p>
             }
-          })()}
+          }}
         </nav>
       </section>
     )
@@ -70,21 +52,12 @@ PaginatedPage.propTypes = {
       PropTypes.number
     ])
   }),
-  params: PropTypes.shape({
-    page: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
-  }),
   dispatch: PropTypes.func
 }
 
 PaginatedPage.defaultProps = {
   paginatedPage: {},
-  params: {},
   dispatch: () => {}
 }
 
-export default connect(
-  ({ paginatedPage }) => ({ paginatedPage })
-)(PaginatedPage)
+export default connect(({ paginatedPage }) => ({ paginatedPage }))(PaginatedPage)

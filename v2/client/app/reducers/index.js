@@ -3,6 +3,4 @@ import {
 } from 'redux'
 import paginatedPage from './paginated-page-reducer'
 
-export default combineReducers({
-  paginatedPage
-})
+export default combineReducers({ paginatedPage })
