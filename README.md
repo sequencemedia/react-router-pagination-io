@@ -1,10 +1,10 @@
 # React.Router.Pagination
 
-Compatible with `React Router 2/3`.
+Compatible with `React Router 3`.
 
 ### Flux or Stateless
 
-CD into `v1` and in your terminal enter the commands:
+Change directory into `v1` and in your terminal enter the commands:
 
 ```
 npm install
@@ -20,7 +20,7 @@ On completion the site should be available on `http://localhost:5001`.
 
 ### Redux
 
-CD into `v2` and in your terminal enter the commands:
+Change directory into `v2` and in your terminal enter the commands:
 
 ```
 npm install
