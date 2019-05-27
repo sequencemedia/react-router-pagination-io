@@ -1,2 +1,0 @@
-
-export { configureStore } from './store'
