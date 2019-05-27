@@ -11,9 +11,9 @@ import Pagination from 'react-router-pagination'
 import { requestPage } from 'react-router-pagination-io/client/app/actions/paginated-page'
 
 import {
-TOTAL_ITEMS,
-ITEMS_PER_PAGE,
-SPREAD } from 'react-router-pagination-io/client/app/constants'
+  TOTAL_ITEMS,
+  ITEMS_PER_PAGE,
+  SPREAD } from 'react-router-pagination-io/client/app/constants'
 
 import Component from './component'
 

@@ -5,7 +5,7 @@ const path = require('path')
 const nconf = require('nconf')
 
 const Hapi = require('@hapi/hapi')
-const Boom = require('@hapi/boom')
+// const Boom = require('@hapi/boom')
 const inert = require('@hapi/inert')
 const vision = require('@hapi/vision')
 
