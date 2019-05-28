@@ -16,8 +16,6 @@ const Pagination = ({
   />
 )
 
-export default Pagination
-
 Pagination.propTypes = {
   ...ReactRouterPagination.propTypes
 }
@@ -25,3 +23,5 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   ...ReactRouterPagination.defaultProps
 }
+
+export default Pagination

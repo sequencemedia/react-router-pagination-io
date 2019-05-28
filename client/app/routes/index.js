@@ -10,6 +10,6 @@ import PaginatedPage from 'react-router-pagination-io/client/app/components/pagi
 export default (
   <Switch>
     <Route exact path='/' component={IndexPage} />
-    <Route path='/:pageNumber' component={PaginatedPage} />
+    <Route path='/:pageNumber(\d+)' component={PaginatedPage} />
   </Switch>
 )

@@ -22,8 +22,8 @@ const PaginatedPage = ({ pageNumber }) => (
   </section>
 )
 
-export default PaginatedPage
-
 PaginatedPage.propTypes = {
   pageNumber: PropTypes.number.isRequired
 }
+
+export default PaginatedPage

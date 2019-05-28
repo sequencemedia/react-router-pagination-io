@@ -1,3 +1,4 @@
+require('module-alias/register')
 require('@babel/register')
 
 const path = require('path')
@@ -5,43 +6,41 @@ const path = require('path')
 const nconf = require('nconf')
 
 const Hapi = require('@hapi/hapi')
-// const Boom = require('@hapi/boom')
+const Boom = require('@hapi/boom')
 const inert = require('@hapi/inert')
 const vision = require('@hapi/vision')
 
-const hogan = require('hapi-hogan')
+const Handlebars = require('handlebars')
+
+const {
+  render
+} = require('react-router-redux-render')
 
 const modulePath = process.cwd()
-// const clientPath = path.resolve(modulePath, 'client')
 const serverPath = path.resolve(modulePath, 'server')
 const publicPath = path.resolve(modulePath, 'public')
-const configPath = path.resolve(serverPath, 'config')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const config = require(configPath)()
+const config = require('react-router-pagination-io/server/config')()
 
 const {
   good
-} = require(path.join(configPath, 'good'))
-/*
+} = require('react-router-pagination-io/server/config/good')
+
 const {
   configureStore
-} = require(path.join(clientPath, 'app/store'))
+} = require('react-router-pagination-io/client/app/store')
 
-const {
-  Renderer
-} = require('redux-routes-renderer')
+const { default: routes } = require('react-router-pagination-io/client/app/routes')
 
-const {
-  Routes
-} = require(path.join(clientPath, 'app/components'))
-
-const badImplementation = (e) => {
+const error = (e) => {
   console.error(e)
 
-  return Boom.badImplementation()
+  return (Boom.isBoom(e))
+    ? e
+    : Boom.boomify(e, { statusCode: 500, message: 'Server error in React Router Pagination' })
 }
-*/
+
 nconf
   .argv().env()
   .defaults(config)
@@ -49,13 +48,15 @@ nconf
 async function start ({ host = 'localhost', port = 5000 }) {
   const server = Hapi.server({ host, port })
 
-  // const renderer = new Renderer()
+  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => {
+    const state = { paginatedPage: { page } }
 
-  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => h.view('index') /* (
-    renderer.render(configureStore({ paginatedPage: { page } }), Routes, pathname)
-      .then(({ rendered: app, state }) => h.view('index', { app, state: JSON.stringify(state) }))
-      .catch(badImplementation)
-  ) */
+    return (
+      render(configureStore(state), routes, pathname)
+        .then((app) => h.view('index', { app, state }))
+        .catch(error)
+    )
+  }
 
   await server.register([good, inert, vision])
 
@@ -64,7 +65,8 @@ async function start ({ host = 'localhost', port = 5000 }) {
     path: path.join(serverPath, 'views'),
     engines: {
       html: {
-        module: hogan,
+        module: Handlebars,
+        helpersPath: path.join(serverPath, 'views/helpers'),
         compileMode: 'sync',
         compileOptions: {
           isCached: true
@@ -95,7 +97,7 @@ async function start ({ host = 'localhost', port = 5000 }) {
     }, {
       method: '*',
       path: '/api/{page}',
-      handler: ({ params: { page } }) => ({ page })
+      handler: ({ params: { page } }) => ({ paginatedPage: { page } })
     }
   ])
 

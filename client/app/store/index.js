@@ -26,8 +26,6 @@ export const configureStore = (initialState) => {
     )
   )
 
-  console.log('sagaMiddleware')
-
   /*
    *  Run the Sagas
    */

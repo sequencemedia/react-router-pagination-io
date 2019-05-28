@@ -12,7 +12,7 @@ module.exports = () => {
       return {
         server: {
           host: 'localhost',
-          port: 5002
+          port: 5000
         }
       }
   }

@@ -2,10 +2,6 @@ import {
   connect
 } from 'react-redux'
 
-import {
-  withRouter
-} from 'react-router'
-
 import Pagination from 'react-router-pagination'
 
 import {
@@ -15,4 +11,4 @@ import {
 
 import Component from './component'
 
-export default withRouter(connect(({ paginatedPage: { page } }) => ({ pageNumber: Pagination.calculatePageNumber(page, Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)) }))(Component))
+export default connect(({ paginatedPage: { page } }) => ({ pageNumber: Pagination.calculatePageNumber(page, Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)) }))(Component)

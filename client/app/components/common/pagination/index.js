@@ -13,17 +13,17 @@ import { requestPage } from 'react-router-pagination-io/client/app/actions/pagin
 import {
   TOTAL_ITEMS,
   ITEMS_PER_PAGE,
-  SPREAD } from 'react-router-pagination-io/client/app/constants'
+  SPREAD
+} from 'react-router-pagination-io/client/app/constants'
 
 import Component from './component'
 
 const mapStateToProps = ({ paginatedPage: { page } }, { match }) => {
   const totalPages = Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)
-  const pageNumber = Pagination.calculatePageNumber(page, totalPages)
 
   return {
     totalPages,
-    pageNumber,
+    pageNumber: Pagination.calculatePageNumber(page, totalPages),
     spread: SPREAD,
     match
   }
