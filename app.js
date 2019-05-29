@@ -12,8 +12,10 @@ const vision = require('@hapi/vision')
 
 const Handlebars = require('handlebars')
 
+const fetch = require('isomorphic-fetch')
+
 const {
-  render
+  renderToString
 } = require('react-router-redux-render')
 
 const modulePath = process.cwd()
@@ -48,15 +50,16 @@ nconf
 async function start ({ host = 'localhost', port = 5000 }) {
   const server = Hapi.server({ host, port })
 
-  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => {
-    const state = { paginatedPage: { page } }
-
-    return (
-      render(configureStore(state), routes, pathname)
-        .then((app) => h.view('index', { app, state }))
-        .catch(error)
-    )
-  }
+  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
+    fetch(`${server.info.uri}/api/${page}`)
+      .then((response) => response.json())
+      .then((state) => ({
+        app: renderToString(configureStore(state), { location: pathname }, routes),
+        state
+      }))
+      .then((context) => h.view('index', context))
+      .catch(error)
+  )
 
   await server.register([good, inert, vision])
 
@@ -77,8 +80,13 @@ async function start ({ host = 'localhost', port = 5000 }) {
 
   server.route([
     {
-      path: '/assets/{path*}',
       method: 'GET',
+      path: '/favicon.ico',
+      handler: (request, h) => h.redirect('/assets/favicon.ico')
+    },
+    {
+      method: 'GET',
+      path: '/assets/{path*}',
       handler: {
         directory: {
           path: path.normalize(assetsPath),
@@ -88,11 +96,7 @@ async function start ({ host = 'localhost', port = 5000 }) {
       }
     }, {
       method: '*',
-      path: '/',
-      handler
-    }, {
-      method: '*',
-      path: '/{page}',
+      path: '/{page?}',
       handler
     }, {
       method: '*',
