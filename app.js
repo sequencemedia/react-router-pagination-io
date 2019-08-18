@@ -35,7 +35,9 @@ const {
   configureStore
 } = require('react-router-pagination-io/client/app/store')
 
-const { default: routes } = require('react-router-pagination-io/client/app/routes')
+const {
+  default: routes
+} = require('react-router-pagination-io/client/app/routes')
 
 const error = (e) => {
   console.error(e)
