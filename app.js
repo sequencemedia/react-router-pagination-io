@@ -14,6 +14,8 @@ const Handlebars = require('handlebars')
 
 const fetch = require('isomorphic-fetch')
 
+const chalk = require('chalk')
+
 const {
   renderToString
 } = require('react-router-redux-render')
@@ -107,7 +109,10 @@ async function start ({ host = 'localhost', port = 5000 }) {
 
   await server.start()
 
-  console.log(`\nreact-router-pagination [${server.info.uri}]\n`)
+  console.log(`
+    ${chalk.gray('react-router-pagination')} ${chalk.gray('[')}${chalk.white(server.info.protocol)}${chalk.gray('://')}${chalk.white(server.info.host)}${chalk.gray(':')}${chalk.white(server.info.port)}${chalk.gray(']')}
+    ${chalk.white(new Date(server.info.started))}
+  `)
 }
 
 start(nconf.get('server'))
