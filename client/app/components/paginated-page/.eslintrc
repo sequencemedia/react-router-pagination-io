@@ -1,7 +1,9 @@
 {
   "overrides": [
     {
-      "files": ["component.js"],
+      "files": [
+        "component.js"
+      ],
       "rules": {
         "no-unused-expressions": "off"
       }
