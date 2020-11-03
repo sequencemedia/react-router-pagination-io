@@ -29,10 +29,10 @@ module.exports = {
     ],
     [
       'module-resolver', {
-        root: ['./'],
+        root: ['.'],
         cwd: 'babelrc',
         alias: {
-          'react-router-pagination-io': './'
+          'react-router-pagination-io': '.'
         }
       }
     ]
