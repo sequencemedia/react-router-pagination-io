@@ -1,6 +1,8 @@
 require('module-alias/register')
 require('@babel/register')
 
+const debug = require('debug')
+
 const path = require('path')
 
 const nconf = require('nconf')
@@ -14,11 +16,21 @@ const Handlebars = require('handlebars')
 
 const fetch = require('isomorphic-fetch')
 
-const chalk = require('chalk')
-
 const {
   renderToString
 } = require('react-router-redux-render')
+
+const {
+  env: {
+    DEBUG = 'react-router-pagination-io'
+  }
+} = process
+
+debug.enable(DEBUG)
+
+const log = debug('react-router-pagination-io')
+
+log('`react-router-pagination-io` is awake')
 
 const modulePath = process.cwd()
 const serverPath = path.resolve(modulePath, 'server')
@@ -40,7 +52,7 @@ const {
 } = require('react-router-pagination-io/client/app/routes')
 
 const error = (e) => {
-  console.error(e)
+  log(e)
 
   return (Boom.isBoom(e))
     ? e
@@ -53,6 +65,22 @@ nconf
 
 async function start ({ host = 'localhost', port = 5000 }) {
   const server = Hapi.server({ host, port })
+
+  server.events.on('start', () => {
+    const {
+      info
+    } = server
+
+    log(info)
+  })
+
+  server.events.on('stop', () => {
+    const {
+      info
+    } = server
+
+    log(info)
+  })
 
   const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
     fetch(`${server.info.uri}/api/${page}`)
@@ -110,11 +138,6 @@ async function start ({ host = 'localhost', port = 5000 }) {
   ])
 
   await server.start()
-
-  console.log(`
-    ${chalk.gray('react-router-pagination')} ${chalk.gray('[')}${chalk.white(server.info.protocol)}${chalk.gray('://')}${chalk.white(server.info.host)}${chalk.gray(':')}${chalk.white(server.info.port)}${chalk.gray(']')}
-    ${chalk.white(new Date(server.info.started))}
-  `)
 }
 
 start(nconf.get('server'))
