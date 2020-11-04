@@ -22,7 +22,7 @@
     "pre-commit": "npm run lint && npm run build && git add public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "@hapi/boom": "^9.1.0",
     "@hapi/good": "^9.0.1",
     "@hapi/good-console": "^9.0.1",
