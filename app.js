@@ -18,7 +18,7 @@ const fetch = require('isomorphic-fetch')
 
 const {
   renderToString
-} = require('react-router-redux-render')
+} = require('@sequencemedia/react-router-redux-render')
 
 const {
   env: {
@@ -38,10 +38,6 @@ const publicPath = path.resolve(modulePath, 'public')
 const assetsPath = path.resolve(publicPath, 'assets')
 
 const config = require('react-router-pagination-io/server/config')()
-
-const {
-  good
-} = require('react-router-pagination-io/server/config/good')
 
 const {
   configureStore
@@ -93,7 +89,7 @@ async function start ({ host = 'localhost', port = 5000 }) {
       .catch(error)
   )
 
-  await server.register([good, inert, vision])
+  await server.register([inert, vision])
 
   server.views({
     relativeTo: modulePath,
