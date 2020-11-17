@@ -40,10 +40,6 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
     ]
   },
   devtool: 'source-map',
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()]
-  },
   plugins: [
     new CleanWebpackPlugin({
       verbose: false,
@@ -53,5 +49,11 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
       ]
     }),
     new EnvironmentPlugin({ NODE_ENV })
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin()
+    ]
+  }
 })
