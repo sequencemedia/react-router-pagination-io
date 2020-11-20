@@ -30,7 +30,7 @@
     "@hapi/vision": "^6.0.1",
     "@sequencemedia/react-router-redux-render": "^2.0.0",
     "cross-env": "^7.0.2",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "handlebars": "^4.7.6",
     "isomorphic-fetch": "^3.0.0",
     "module-alias": "^2.2.2",
