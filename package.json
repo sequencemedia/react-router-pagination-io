@@ -35,7 +35,7 @@
     "isomorphic-fetch": "^3.0.0",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
-    "nconf": "^0.11.0",
+    "nconf": "^0.11.1",
     "prop-types": "15.7.2",
     "react": "16.14.0",
     "react-dom": "16.14.0",
