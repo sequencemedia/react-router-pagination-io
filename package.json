@@ -28,7 +28,7 @@
     "@hapi/inert": "^6.0.4",
     "@hapi/joi": "^17.1.1",
     "@hapi/vision": "^6.1.0",
-    "@sequencemedia/react-router-redux-render": "^2.0.31",
+    "@sequencemedia/react-router-redux-render": "^2.0.32",
     "cross-env": "^7.0.3",
     "debug": "^4.3.2",
     "handlebars": "^4.7.7",
@@ -42,7 +42,7 @@
     "react-redux": "7.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-router-pagination": "^2.2.36",
+    "react-router-pagination": "^2.2.37",
     "redux": "^4.1.2",
     "redux-saga": "^1.1.3"
   },
@@ -63,7 +63,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^6.3.0",
     "core-js": "^3.19.1",
-    "eslint": "^8.1.0",
+    "eslint": "^8.2.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-import": "^2.25.2",
@@ -74,7 +74,7 @@
     "gulp-develop-server": "^0.5.2",
     "husky": "^7.0.4",
     "terser-webpack-plugin": "^5.2.4",
-    "webpack": "^5.61.0",
+    "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1"
   },
   "_moduleAliases": {
