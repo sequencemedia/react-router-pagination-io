@@ -10,7 +10,8 @@ const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin')
 const {
-  EnvironmentPlugin
+  EnvironmentPlugin,
+  SourceMapDevToolPlugin
 } = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 
@@ -39,7 +40,6 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
       }
     ]
   },
-  devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin({
       verbose: false,
@@ -48,12 +48,16 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
         path.join(assetsPath, 'js').concat('/*.js.map')
       ]
     }),
-    new EnvironmentPlugin({ NODE_ENV })
+    new EnvironmentPlugin({ NODE_ENV }),
+    new SourceMapDevToolPlugin({ filename: '[name].js.map' })
   ],
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin()
     ]
+  },
+  experiments: {
+    backCompat: false
   }
 })
