@@ -28,7 +28,7 @@
     "@hapi/inert": "^6.0.5",
     "@hapi/joi": "^17.1.1",
     "@hapi/vision": "^6.1.0",
-    "@sequencemedia/react-router-redux-render": "^2.0.98",
+    "@sequencemedia/react-router-redux-render": "^2.0.100",
     "cross-env": "^7.0.3",
     "debug": "^4.3.3",
     "handlebars": "^4.7.7",
