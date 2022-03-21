@@ -42,7 +42,7 @@
     "react-redux": "7.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-router-pagination": "2.2.143",
+    "react-router-pagination": "2.2.144",
     "redux": "^4.1.2",
     "redux-saga": "^1.1.3"
   },
