@@ -34,7 +34,7 @@
     "handlebars": "^4.7.7",
     "isomorphic-fetch": "^3.0.0",
     "module-alias": "^2.2.2",
-    "moment": "^2.29.2",
+    "moment": "^2.29.3",
     "nconf": "^0.12.0",
     "prop-types": "15.7.2",
     "react": "16.14.0",
@@ -42,7 +42,7 @@
     "react-redux": "7.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-router-pagination": "2.2.166",
+    "react-router-pagination": "2.2.167",
     "redux": "^4.1.2",
     "redux-saga": "^1.1.3"
   },
