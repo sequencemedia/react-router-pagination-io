@@ -34,7 +34,7 @@
     "handlebars": "^4.7.7",
     "isomorphic-fetch": "^3.0.0",
     "module-alias": "^2.2.2",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "nconf": "^0.12.0",
     "prop-types": "15.7.2",
     "react": "16.14.0",
