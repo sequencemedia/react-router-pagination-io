@@ -1,63 +1,38 @@
-require('@babel/register')({
-  ignore: [
-    /node_modules/
-  ]
-})
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const path = require('path')
-
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin')
-const {
-  EnvironmentPlugin,
-  SourceMapDevToolPlugin
-} = require('webpack')
-const TerserPlugin = require('terser-webpack-plugin')
-
-const modulePath = process.cwd()
-const clientPath = path.resolve(modulePath, 'client')
-const assetsPath = path.resolve(modulePath, 'public/assets')
-
-module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
-  mode: NODE_ENV,
-  entry: {
-    app: path.resolve(clientPath, 'index.js')
-  },
+module.exports = {
+  entry: path.join(__dirname, "client", "index.js"),
   output: {
-    path: path.join(assetsPath, 'js'),
-    filename: '[name].js'
+    path: path.join(__dirname, "/dist"), // the bundle output path
+    filename: "bundle.js", // the name of the bundle
   },
-  stats: {
-    colors: true
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/index.html", // to import index.html file inside index.js
+    }),
+  ],
+  devServer: {
+    port: 3000, // you can change the port
   },
   module: {
     rules: [
       {
-        test: /\.js?$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
+        test: /\.(js|jsx)$/, // .js and .jsx files
+        exclude: /node_modules/, // excluding the node_modules folder
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.(sa|sc|c)ss$/, // styles files
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
+        loader: "url-loader",
+        options: { limit: false },
+      },
+    ],
   },
-  plugins: [
-    new CleanWebpackPlugin({
-      verbose: false,
-      cleanOnceBeforeBuildPatterns: [
-        path.join(assetsPath, 'js').concat('/*.js'),
-        path.join(assetsPath, 'js').concat('/*.js.map')
-      ]
-    }),
-    new EnvironmentPlugin({ NODE_ENV }),
-    new SourceMapDevToolPlugin({ filename: '[name].js.map' })
-  ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin()
-    ]
-  },
-  experiments: {
-    backCompat: false
-  }
-})
+};
