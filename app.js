@@ -78,8 +78,8 @@ async function start ({ host = 'localhost', port = 5000 }) {
     log(info)
   })
 
-  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
-    fetch(`https://reqres.in/api/users?page=${page}`)
+  const handler = ({ params: { page = 3 }, url: { pathname = window.location.pathname } }, h) => {
+    return fetch(`https://reqres.in/api/users?page=${page}`)
       .then((response) => {
         response.json()
       })
@@ -89,7 +89,7 @@ async function start ({ host = 'localhost', port = 5000 }) {
       }))
       .then((context) => h.view('index', context))
       .catch(error)
-  )
+  }
 
   await server.register([inert, vision])
 
