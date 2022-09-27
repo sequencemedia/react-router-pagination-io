@@ -15,7 +15,9 @@ const PaginatedPage = ({ pageNumber }) => (
       <p>Return to the <Link to='/'>index page</Link>.</p>
       {do {
         if (pageNumber) {
+        <>
           <p>Redux has state for page {pageNumber}.</p>
+        </>
         }
       }}
     </nav>

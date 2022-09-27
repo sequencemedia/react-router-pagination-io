@@ -79,8 +79,10 @@ async function start ({ host = 'localhost', port = 5000 }) {
   })
 
   const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
-    fetch(`${server.info.uri}/api/${page}`)
-      .then((response) => response.json())
+    fetch(`https://reqres.in/api/users?page=${page}`)
+      .then((response) => {
+        response.json()
+      })
       .then((state) => ({
         app: renderToString(configureStore(state), { location: pathname }, routes),
         state
@@ -129,7 +131,7 @@ async function start ({ host = 'localhost', port = 5000 }) {
     }, {
       method: '*',
       path: '/api/{page}',
-      handler: ({ params: { page } }) => ({ paginatedPage: { page } })
+      handler: (response) => ({ params: { page } }) => ({ paginatedPage: { page }, response })
     }
   ])
 
