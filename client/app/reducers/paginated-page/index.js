@@ -1,14 +1,18 @@
 import {
-  REQUEST_PAGE,
   REQUEST_PAGE_SUCCEEDED,
   REQUEST_PAGE_FAILED
 } from 'react-router-pagination-io/client/app/actions/paginated-page'
 
-export default function paginatedPageReducer (state = {}, { type, ...action } = {}) {
-  switch (type) {
-    case REQUEST_PAGE:
+const defaultState = {
+  users: []
+}
 
-      return { ...state, ...action }
+export default function paginatedPageReducer(state = defaultState, { type, ...action } = {}) {
+  switch (type) {
+
+    case "SET_USERS":
+      return { ...state, users: action.payload }
+
     case REQUEST_PAGE_SUCCEEDED:
 
       return { ...state, ...action }

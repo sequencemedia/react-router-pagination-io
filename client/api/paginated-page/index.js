@@ -1,3 +1,4 @@
 import fetch from 'isomorphic-fetch'
 
-export const paginatedPage = ({ page }) => fetch(`/api/${page}`).then((response) => response.json())
+export const paginatedPage = ( page ) => 
+fetch(`https://reqres.in/api/users?page=${page}`).then((response) => response.json())
