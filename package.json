@@ -19,7 +19,8 @@
     "dev": "cross-env NODE_ENV=development concurrently -r \"gulp\" \"webpack -d -w\"",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "pre-commit": "npm run lint && npm run build && git add public"
+    "pre-commit": "npm run lint && npm run build && git add public",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@babel/runtime": "^7.19.4",
