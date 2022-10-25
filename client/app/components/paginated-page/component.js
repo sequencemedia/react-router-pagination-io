@@ -7,20 +7,26 @@ import {
 
 import Pagination from 'react-router-pagination-io/client/app/components/common/pagination'
 
-const PaginatedPage = ({ pageNumber }) => (
-  <section>
-    <h1>Pagination (Page {pageNumber})</h1>
-    <Pagination />
-    <nav>
-      <p>Return to the <Link to='/'>index page</Link>.</p>
-      {do {
-        if (pageNumber) {
-          <p>Redux has state for page {pageNumber}.</p>
-        }
-      }}
-    </nav>
-  </section>
-)
+function PaginatedPage ({ pageNumber }) {
+  let content = null
+
+  if (pageNumber) {
+    content = (
+      <p>Redux has state for page {pageNumber}.</p>
+    )
+  }
+
+  return (
+    <section>
+      <h1>Pagination (Page {pageNumber})</h1>
+      <Pagination />
+      <nav>
+        <p>Return to the <Link to='/'>index page</Link>.</p>
+      </nav>
+      {content}
+    </section>
+  )
+}
 
 PaginatedPage.propTypes = {
   pageNumber: PropTypes.number.isRequired

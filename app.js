@@ -21,9 +21,21 @@ const {
 } = require('@sequencemedia/react-router-redux-render')
 
 const {
+  default: config
+} = require('react-router-pagination-io/server/config')
+
+const {
+  configureStore
+} = require('react-router-pagination-io/client/app/store')
+
+const {
+  default: routes
+} = require('react-router-pagination-io/client/app/routes')
+
+const {
   env: {
     DEBUG = 'react-router-pagination-io'
-  }
+  } = {}
 } = process
 
 debug.enable(DEBUG)
@@ -37,16 +49,6 @@ const serverPath = path.resolve(modulePath, 'server')
 const publicPath = path.resolve(modulePath, 'public')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const config = require('react-router-pagination-io/server/config')()
-
-const {
-  configureStore
-} = require('react-router-pagination-io/client/app/store')
-
-const {
-  default: routes
-} = require('react-router-pagination-io/client/app/routes')
-
 const error = (e) => {
   log(e)
 
@@ -59,7 +61,7 @@ nconf
   .argv().env()
   .defaults(config)
 
-async function start ({ host = 'localhost', port = 5000 }) {
+async function start ({ host = 'localhost', port = 5000 } = {}) {
   const server = Hapi.server({ host, port })
 
   server.events.on('start', () => {
@@ -77,17 +79,6 @@ async function start ({ host = 'localhost', port = 5000 }) {
 
     log(info)
   })
-
-  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
-    fetch(`${server.info.uri}/api/${page}`)
-      .then((response) => response.json())
-      .then((state) => ({
-        app: renderToString(configureStore(state), { location: pathname }, routes),
-        state
-      }))
-      .then((context) => h.view('index', context))
-      .catch(error)
-  )
 
   await server.register([inert, vision])
 
@@ -110,7 +101,9 @@ async function start ({ host = 'localhost', port = 5000 }) {
     {
       method: 'GET',
       path: '/favicon.ico',
-      handler: (request, h) => h.redirect('/assets/favicon.ico')
+      handler (request, h) {
+        return h.redirect('/assets/favicon.ico')
+      }
     },
     {
       method: 'GET',
@@ -122,14 +115,29 @@ async function start ({ host = 'localhost', port = 5000 }) {
           index: false
         }
       }
-    }, {
+    },
+    {
       method: '*',
       path: '/{page?}',
-      handler
-    }, {
+      handler ({ params: { page = 0 }, url: { pathname = '/' } }, h) {
+        return (
+          fetch(`${server.info.uri}/api/${page}`)
+            .then((response) => response.json())
+            .then((state) => ({
+              app: renderToString(configureStore(state), { location: pathname }, routes),
+              state
+            }))
+            .then((context) => h.view('index', context))
+            .catch(error)
+        )
+      }
+    },
+    {
       method: '*',
       path: '/api/{page}',
-      handler: ({ params: { page } }) => ({ paginatedPage: { page } })
+      handler ({ params: { page } }) {
+        return { paginatedPage: { page } }
+      }
     }
   ])
 

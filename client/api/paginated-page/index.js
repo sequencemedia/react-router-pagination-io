@@ -1,3 +1,3 @@
 import fetch from 'isomorphic-fetch'
 
-export const paginatedPage = ({ page }) => fetch(`/api/${page}`).then((response) => response.json())
+export const paginatedPage = ({ page }) => fetch('/api/'.concat(page)).then((response) => response.json())
