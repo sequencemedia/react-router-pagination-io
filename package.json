@@ -23,7 +23,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.13",
+    "@babel/runtime": "^7.21.0",
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.0",
     "@hapi/inert": "^7.0.1",
