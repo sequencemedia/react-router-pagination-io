@@ -1,6 +1,6 @@
 {
   "name": "react-router-pagination-io",
-  "version": "2.2.67",
+  "version": "2.2.68",
   "description": "React Router Pagination",
   "private": true,
   "main": "./app.js",
