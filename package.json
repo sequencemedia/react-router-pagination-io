@@ -3,7 +3,8 @@
   "version": "2.2.116",
   "description": "React Router Pagination",
   "private": true,
-  "main": "./app.js",
+  "main": "./app.mjs",
+  "type": "module",
   "author": {
     "name": "Jonathan Perry for Sequence Media Limited",
     "email": "sequencemedia@sequencemedia.net",
@@ -15,14 +16,15 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
+    "build:dev": "cross-env NODE_ENV=development webpack --mode development",
     "start": "cross-env NODE_ENV=production node .",
-    "lint": "eslint .",
+    "start:dev": "cross-env NODE_ENV=development node .",
+    "lint": "eslint . --ext .mjs,.cjs,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "pre-commit": "npm run lint && npm run build && git add public",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.2",
     "@hapi/inert": "^7.1.0",
@@ -32,16 +34,14 @@
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
     "handlebars": "^4.7.8",
-    "isomorphic-fetch": "^3.0.0",
-    "module-alias": "^2.2.3",
     "nconf": "^0.12.0",
     "prop-types": "15.7.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-redux": "7.2.2",
-    "react-router": "5.2.0",
-    "react-router-dom": "5.2.0",
-    "react-router-pagination": "2.2.449",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "react-router": "^6.14.2",
+    "react-router-dom": "^6.14.2",
+    "react-router-pagination": "^3.0.1",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3"
   },
@@ -49,11 +49,6 @@
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-do-expressions": "^7.22.5",
-    "@babel/plugin-proposal-export-default-from": "^7.22.5",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "@babel/plugin-transform-runtime": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
     "@babel/register": "^7.22.5",
@@ -71,7 +66,19 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   },
-  "_moduleAliases": {
-    "react-router-pagination-io": "./"
+  "imports": {
+    "#server/config": "./server/config/index.mjs",
+    "#client/api/paginated-page": "./client/api/paginated-page/index.mjs",
+    "#client/app/constants": "./client/app/constants/index.mjs",
+    "#client/app/actions/paginated-page": "./client/app/actions/paginated-page/index.mjs",
+    "#client/app/reducers/paginated-page": "./client/app/reducers/paginated-page/index.mjs",
+    "#client/app/reducers": "./client/app/reducers/index.mjs",
+    "#client/app/routes": "./client/app/routes/index.cjs",
+    "#client/app/sagas": "./client/app/sagas/index.mjs",
+    "#client/app/store": "./client/app/store/index.mjs",
+    "#client/app/components/common/pagination": "./client/app/components/common/pagination/index.cjs",
+    "#client/app/components/common/*": "./client/app/components/common/*.cjs",
+    "#client/app/components/index-page": "./client/app/components/index-page/index.cjs",
+    "#client/app/components/paginated-page": "./client/app/components/paginated-page/index.cjs"
   }
 }

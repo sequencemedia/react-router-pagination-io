@@ -6,8 +6,8 @@ import {
 
 import createSagaMiddleware from 'redux-saga'
 
-import reducers from 'react-router-pagination-io/client/app/reducers'
-import sagas from 'react-router-pagination-io/client/app/sagas'
+import reducers from '#client/app/reducers'
+import sagas from '#client/app/sagas'
 
 export const configureStore = (initialState) => {
   /*

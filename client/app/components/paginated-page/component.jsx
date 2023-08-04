@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
-import Pagination from 'react-router-pagination-io/client/app/components/common/pagination'
+import Pagination from '#client/app/components/common/pagination'
 
 function PaginatedPage ({ pageNumber }) {
   let content = null

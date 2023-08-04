@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Pagination from 'react-router-pagination-io/client/app/components/common/pagination'
+import Pagination from '#client/app/components/common/pagination'
 
 export default () => (
   <section>

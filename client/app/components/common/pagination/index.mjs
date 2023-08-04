@@ -2,21 +2,23 @@ import {
   connect
 } from 'react-redux'
 
-import {
-  withRouter
-} from 'react-router'
+import reactRouterPagination from 'react-router-pagination'
 
-import Pagination from 'react-router-pagination'
-
-import { requestPage } from 'react-router-pagination-io/client/app/actions/paginated-page'
+import { requestPage } from '#client/app/actions/paginated-page'
 
 import {
   TOTAL_ITEMS,
   ITEMS_PER_PAGE,
   SPREAD
-} from 'react-router-pagination-io/client/app/constants'
+} from '#client/app/constants'
 
-import Component from './component'
+import withRouter from '#client/app/components/common/with-router'
+
+import Component from './component.cjs'
+
+const {
+  default: Pagination
+} = reactRouterPagination
 
 const mapStateToProps = ({ paginatedPage: { page } }, { match }) => {
   const totalPages = Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)

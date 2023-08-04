@@ -9,9 +9,9 @@ import {
   REQUEST_PAGE,
   requestPageSucceeded,
   requestPageFailed
-} from 'react-router-pagination-io/client/app/actions/paginated-page'
+} from '#client/app/actions/paginated-page'
 
-import * as api from 'react-router-pagination-io/client/api/paginated-page'
+import * as api from '#client/api/paginated-page'
 
 function * paginatedPage ({ page }) {
   try {

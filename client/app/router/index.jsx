@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 
-import Routes from 'react-router-pagination-io/client/app/routes'
+import Routes from '#client/app/routes'
 
 export default ( // NOT a function
   <Router>

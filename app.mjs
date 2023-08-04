@@ -1,36 +1,27 @@
-require('module-alias/register')
-require('@babel/register')
+import debug from 'debug'
 
-const debug = require('debug')
+import path from 'path'
 
-const path = require('path')
+import nconf from 'nconf'
 
-const nconf = require('nconf')
+import Hapi from '@hapi/hapi'
+import Boom from '@hapi/boom'
+import inert from '@hapi/inert'
+import vision from '@hapi/vision'
 
-const Hapi = require('@hapi/hapi')
-const Boom = require('@hapi/boom')
-const inert = require('@hapi/inert')
-const vision = require('@hapi/vision')
+import Handlebars from 'handlebars'
 
-const Handlebars = require('handlebars')
-
-const fetch = require('isomorphic-fetch')
-
-const {
+import {
   renderToString
-} = require('@sequencemedia/react-router-redux-render')
+} from '@sequencemedia/react-router-redux-render'
 
-const {
-  default: config
-} = require('react-router-pagination-io/server/config')
+import config from '#server/config'
 
-const {
+import {
   configureStore
-} = require('react-router-pagination-io/client/app/store')
+} from '#client/app/store'
 
-const {
-  default: routes
-} = require('react-router-pagination-io/client/app/routes')
+import routes from '#client/app/routes'
 
 const {
   env: {
@@ -49,7 +40,7 @@ const serverPath = path.resolve(modulePath, 'server')
 const publicPath = path.resolve(modulePath, 'public')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const error = (e) => {
+function error (e) {
   log(e)
 
   return (Boom.isBoom(e))

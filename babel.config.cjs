@@ -22,16 +22,6 @@ module.exports = {
     ]
   ],
   plugins: [
-    '@babel/transform-runtime',
-    '@babel/proposal-export-default-from',
-    '@babel/proposal-export-namespace-from',
-    '@babel/proposal-do-expressions',
-    [
-      '@babel/proposal-class-properties',
-      {
-        loose: false
-      }
-    ],
     [
       'module-resolver', {
         alias: {

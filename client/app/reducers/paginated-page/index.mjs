@@ -2,7 +2,7 @@ import {
   REQUEST_PAGE,
   REQUEST_PAGE_SUCCEEDED,
   REQUEST_PAGE_FAILED
-} from 'react-router-pagination-io/client/app/actions/paginated-page'
+} from '#client/app/actions/paginated-page'
 
 export default function paginatedPageReducer (state = {}, { type, ...action } = {}) {
   switch (type) {
