@@ -21,7 +21,6 @@
     "start:dev": "cross-env NODE_ENV=development node .",
     "lint": "eslint . --ext .mjs,.cjs,.jsx",
     "lint:fix": "npm run lint -- --fix",
-    "pre-commit": "npm run lint && npm run build && git add public",
     "prepare": "husky install"
   },
   "dependencies": {
