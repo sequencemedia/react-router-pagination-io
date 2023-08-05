@@ -10,6 +10,6 @@ import PaginatedPage from '#client/app/components/paginated-page'
 export default (
   <Routes>
     <Route exact path='/' element={<IndexPage />} />
-    <Route path='/:pageNumber(\d+)' element={<PaginatedPage />} />
+    <Route path='/:pageNumber' element={<PaginatedPage />} />
   </Routes>
 )

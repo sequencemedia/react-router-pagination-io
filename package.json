@@ -29,7 +29,7 @@
     "@hapi/hapi": "^21.3.2",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.2",
-    "@sequencemedia/react-router-redux-render": "2.0.430",
+    "@sequencemedia/react-router-redux-render": "2.3.0",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
     "handlebars": "^4.7.8",
@@ -40,7 +40,7 @@
     "react-redux": "^8.1.2",
     "react-router": "^6.14.2",
     "react-router-dom": "^6.14.2",
-    "react-router-pagination": "^3.0.1",
+    "react-router-pagination": "3.1.0",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3"
   },
@@ -48,8 +48,10 @@
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
+    "@babel/plugin-transform-typescript": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "@babel/register": "^7.22.5",
     "@sequencemedia/hooks": "^1.0.444",
     "babel-loader": "^9.1.3",
@@ -67,15 +69,24 @@
     "#server/config": "./server/config/index.mjs",
     "#client/api/paginated-page": "./client/api/paginated-page/index.mjs",
     "#client/app/constants": "./client/app/constants/index.mjs",
-    "#client/app/actions/paginated-page": "./client/app/actions/paginated-page/index.mjs",
+    "#client/app/actions/paginated-page": {
+      "require": "./client/app/actions/paginated-page/index.cjs",
+      "import": "./client/app/actions/paginated-page/index.mjs"
+    },
     "#client/app/reducers/paginated-page": "./client/app/reducers/paginated-page/index.mjs",
     "#client/app/reducers": "./client/app/reducers/index.mjs",
     "#client/app/routes": "./client/app/routes/index.cjs",
     "#client/app/sagas": "./client/app/sagas/index.mjs",
     "#client/app/store": "./client/app/store/index.mjs",
-    "#client/app/components/common/pagination": "./client/app/components/common/pagination/index.cjs",
+    "#client/app/components/common/pagination": {
+      "require": "./client/app/components/common/pagination/index.cjs",
+      "import": "./client/app/components/common/pagination/index.mjs"
+    },
     "#client/app/components/common/*": "./client/app/components/common/*.cjs",
     "#client/app/components/index-page": "./client/app/components/index-page/index.cjs",
-    "#client/app/components/paginated-page": "./client/app/components/paginated-page/index.cjs"
+    "#client/app/components/paginated-page": {
+      "require": "./client/app/components/paginated-page/index.cjs",
+      "import": "./client/app/components/paginated-page/index.mjs"
+    }
   }
 }

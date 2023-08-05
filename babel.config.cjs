@@ -1,33 +1,49 @@
 module.exports = {
-  compact: true,
-  comments: false,
   presets: [
     [
       '@babel/env', {
         targets: {
           node: 'current',
           browsers: [
-            'last 2 versions'
+            'last 4 versions',
+            'safari >= 9',
+            'ios >= 8',
+            'ie >= 9',
+            '> 2%'
           ]
         },
         useBuiltIns: 'usage',
         corejs: 3
       }
     ],
-    [
-      '@babel/react',
-      {
-        runtime: 'automatic'
-      }
-    ]
+    '@babel/react'
   ],
-  plugins: [
-    [
-      'module-resolver', {
-        alias: {
-          'react-router-pagination-io': '.'
-        }
-      }
-    ]
+  overrides: [
+    {
+      test: /\.mts$|\.cts$|\.tsx$/,
+      presets: [
+        '@babel/typescript',
+        [
+          '@babel/env', {
+            targets: {
+              node: 'current',
+              browsers: [
+                'last 4 versions',
+                'safari >= 9',
+                'ios >= 8',
+                'ie >= 9',
+                '> 2%'
+              ]
+            },
+            useBuiltIns: 'usage',
+            corejs: 3
+          }
+        ],
+        '@babel/react'
+      ],
+      plugins: [
+        '@babel/transform-typescript'
+      ]
+    }
   ]
 }

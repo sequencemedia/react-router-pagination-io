@@ -55,11 +55,11 @@ export default function common (env, { mode = NODE_ENV } = {}) {
     module: {
       rules: [
         {
-          test: /\.cjs?$|\.jsx?$|\.mjs?$/,
+          test: /\.mjs?$|\.cjs?$|\.jsx?$|\.mts?$|\.cts?$|\.tsx?$/,
           use: {
             loader: 'babel-loader'
           },
-          exclude: /node_modules/
+          exclude: /node_modules\/(?!react-router-pagination)/
         }
       ]
     },

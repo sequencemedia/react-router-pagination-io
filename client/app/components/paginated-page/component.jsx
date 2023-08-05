@@ -1,15 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import {
+  useParams,
   Link
 } from 'react-router-dom'
 
 import Pagination from '#client/app/components/common/pagination'
 
-function PaginatedPage ({ pageNumber }) {
-  let content = null
+function PaginatedPage () {
+  const { pageNumber } = useParams()
 
+  let content = null
   if (pageNumber) {
     content = (
       <p>Redux has state for page {pageNumber}.</p>
@@ -26,10 +26,6 @@ function PaginatedPage ({ pageNumber }) {
       {content}
     </section>
   )
-}
-
-PaginatedPage.propTypes = {
-  pageNumber: PropTypes.number.isRequired
 }
 
 export default PaginatedPage

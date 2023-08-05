@@ -1,3 +1,12 @@
-require('@babel/register')
+require('@babel/register')({
+  extensions: [
+    '.mjs',
+    '.jsx'
+  ]
+})
 
-module.exports = require('./index.mjs')
+const {
+  default: component
+} = require('./index.mjs')
+
+module.exports = component
