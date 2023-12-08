@@ -39,7 +39,7 @@
     "react-redux": "^9.0.2",
     "react-router": "^6.20.1",
     "react-router-dom": "^6.20.1",
-    "react-router-pagination": "3.2.49",
+    "react-router-pagination": "3.2.50",
     "redux": "^5.0.0",
     "redux-saga": "^1.2.3"
   },
