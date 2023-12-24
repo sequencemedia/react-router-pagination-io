@@ -40,7 +40,7 @@
     "react-router": "^6.21.1",
     "react-router-dom": "^6.21.1",
     "react-router-pagination": "3.2.60",
-    "redux": "^5.0.0",
+    "redux": "^5.0.1",
     "redux-saga": "^1.2.3"
   },
   "devDependencies": {
