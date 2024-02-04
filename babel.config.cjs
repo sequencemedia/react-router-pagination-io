@@ -1,7 +1,8 @@
 module.exports = {
   presets: [
     [
-      '@babel/env', {
+      '@babel/env',
+      {
         targets: {
           node: 'current',
           browsers: [
@@ -24,7 +25,8 @@ module.exports = {
       presets: [
         '@babel/typescript',
         [
-          '@babel/env', {
+          '@babel/env',
+          {
             targets: {
               node: 'current',
               browsers: [
