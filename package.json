@@ -17,11 +17,11 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-    "start": "cross-env NODE_ENV=production node .",
-    "start:dev": "cross-env NODE_ENV=development node .",
     "lint": "eslint . --ext .mjs,.cjs,.jsx",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "cross-env NODE_ENV=production node .",
+    "start:dev": "cross-env NODE_ENV=development node ."
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
@@ -39,7 +39,7 @@
     "react-redux": "^9.1.2",
     "react-router": "^6.23.1",
     "react-router-dom": "^6.23.1",
-    "react-router-pagination": "3.2.139",
+    "react-router-pagination": "3.2.140",
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0"
   },
@@ -64,27 +64,27 @@
     "webpack-cli": "^5.1.4"
   },
   "imports": {
-    "#server/config": "./server/config/index.mjs",
     "#client/api/paginated-page": "./client/api/paginated-page/index.mjs",
-    "#client/app/constants": "./client/app/constants/index.mjs",
     "#client/app/actions/paginated-page": {
       "require": "./client/app/actions/paginated-page/index.cjs",
       "import": "./client/app/actions/paginated-page/index.mjs"
     },
-    "#client/app/reducers/paginated-page": "./client/app/reducers/paginated-page/index.mjs",
-    "#client/app/reducers": "./client/app/reducers/index.mjs",
-    "#client/app/routes": "./client/app/routes/index.cjs",
-    "#client/app/sagas": "./client/app/sagas/index.mjs",
-    "#client/app/store": "./client/app/store/index.mjs",
+    "#client/app/components/common/*": "./client/app/components/common/*.cjs",
     "#client/app/components/common/pagination": {
       "require": "./client/app/components/common/pagination/index.cjs",
       "import": "./client/app/components/common/pagination/index.mjs"
     },
-    "#client/app/components/common/*": "./client/app/components/common/*.cjs",
     "#client/app/components/index-page": "./client/app/components/index-page/index.cjs",
     "#client/app/components/paginated-page": {
       "require": "./client/app/components/paginated-page/index.cjs",
       "import": "./client/app/components/paginated-page/index.mjs"
-    }
+    },
+    "#client/app/constants": "./client/app/constants/index.mjs",
+    "#client/app/reducers": "./client/app/reducers/index.mjs",
+    "#client/app/reducers/paginated-page": "./client/app/reducers/paginated-page/index.mjs",
+    "#client/app/routes": "./client/app/routes/index.cjs",
+    "#client/app/sagas": "./client/app/sagas/index.mjs",
+    "#client/app/store": "./client/app/store/index.mjs",
+    "#server/config": "./server/config/index.mjs"
   }
 }
