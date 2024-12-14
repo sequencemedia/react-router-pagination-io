@@ -28,7 +28,7 @@
     "@hapi/hapi": "^21.3.12",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
-    "@sequencemedia/react-router-redux-render": "2.4.12",
+    "@sequencemedia/react-router-redux-render": "2.4.13",
     "cross-env": "^7.0.3",
     "debug": "^4.4.0",
     "handlebars": "^4.7.8",
@@ -58,7 +58,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-react": "^7.37.2",
     "husky": "^9.1.7",
-    "terser-webpack-plugin": "^5.3.10",
+    "terser-webpack-plugin": "^5.3.11",
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   },
