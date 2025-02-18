@@ -1,6 +1,6 @@
 {
   "name": "react-router-pagination-io",
-  "version": "2.3.330",
+  "version": "2.3.331",
   "description": "React Router Pagination",
   "private": true,
   "main": "./app.mjs",
