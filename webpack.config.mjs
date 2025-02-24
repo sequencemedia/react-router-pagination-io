@@ -40,7 +40,6 @@ export default function common (env, { mode = NODE_ENV } = {}) {
         'prop-types',
         'react-redux',
         'react-router',
-        'react-router-dom',
         'redux',
         'redux-saga'
       ]

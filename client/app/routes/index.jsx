@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Routes,
   Route
-} from 'react-router-dom'
+} from 'react-router'
 
 import IndexPage from '#client/app/components/index-page'
 import PaginatedPage from '#client/app/components/paginated-page'
