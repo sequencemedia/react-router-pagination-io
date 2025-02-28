@@ -38,7 +38,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.2.0",
-    "react-router-pagination": "3.2.289",
+    "react-router-pagination": "3.2.290",
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0"
   },
@@ -50,7 +50,7 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@babel/register": "^7.25.9",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.40.0",
     "eslint": "8.57.1",
