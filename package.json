@@ -38,7 +38,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.3.0",
-    "react-router-pagination": "3.2.304",
+    "react-router-pagination": "3.2.306",
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0"
   },
