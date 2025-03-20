@@ -1,7 +1,7 @@
 require('@babel/register')
 
 const {
-  default: component
+  default: Component
 } = require('./index.jsx')
 
-module.exports = component
+module.exports = Component
