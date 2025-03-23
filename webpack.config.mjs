@@ -54,7 +54,7 @@ export default function common (env, { mode = NODE_ENV } = {}) {
     module: {
       rules: [
         {
-          test: /\.mjs?$|\.cjs?$|\.jsx?$|\.mts?$|\.cts?$|\.tsx?$/,
+          test: /\.(mjs|cjs|jsx|mts|cts|tsx)?$/,
           use: {
             loader: 'babel-loader'
           },

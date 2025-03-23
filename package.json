@@ -1,6 +1,6 @@
 {
   "name": "react-router-pagination-io",
-  "version": "2.3.353",
+  "version": "2.4.1",
   "description": "React Router Pagination",
   "private": true,
   "main": "./app.mjs",
@@ -37,8 +37,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "react-router": "^7.3.0",
-    "react-router-pagination": "3.2.307",
+    "react-router": "^7.4.0",
+    "react-router-pagination": "^3.3.3",
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0"
   },

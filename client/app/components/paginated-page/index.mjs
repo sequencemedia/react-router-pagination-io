@@ -11,4 +11,11 @@ import {
 
 import Component from './component.cjs'
 
-export default connect(({ paginatedPage: { page } }) => ({ pageNumber: Pagination.calculatePageNumber(page, Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)) }))(Component)
+export default connect(({ paginatedPage: { page } }) => {
+  const totalPages = Pagination.calculateTotalPages(TOTAL_ITEMS, ITEMS_PER_PAGE)
+  const pageNumber = Pagination.calculatePageNumber(page, totalPages)
+
+  return {
+    pageNumber
+  }
+})(Component)
