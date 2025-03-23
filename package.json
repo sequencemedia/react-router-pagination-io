@@ -1,6 +1,6 @@
 {
   "name": "react-router-pagination-io",
-  "version": "2.4.1",
+  "version": "2.4.3",
   "description": "React Router Pagination",
   "private": true,
   "main": "./app.mjs",
@@ -28,7 +28,7 @@
     "@hapi/hapi": "^21.4.0",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
-    "@sequencemedia/react-router-redux-render": "2.5.4",
+    "@sequencemedia/react-router-redux-render": "2.5.8",
     "cross-env": "^7.0.3",
     "debug": "^4.4.0",
     "handlebars": "^4.7.8",
@@ -38,7 +38,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.4.0",
-    "react-router-pagination": "^3.3.3",
+    "react-router-pagination": "^3.3.11",
     "redux": "^5.0.1",
     "redux-saga": "^1.3.0"
   },
