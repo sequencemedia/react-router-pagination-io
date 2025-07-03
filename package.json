@@ -28,7 +28,7 @@
     "@hapi/hapi": "^21.4.0",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
-    "@sequencemedia/react-router-redux-render": "2.5.72",
+    "@sequencemedia/react-router-redux-render": "2.5.73",
     "cross-env": "^7.0.3",
     "debug": "^4.4.1",
     "handlebars": "^4.7.8",
@@ -43,10 +43,10 @@
     "redux-saga": "^1.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.7",
-    "@babel/eslint-parser": "^7.27.5",
-    "@babel/plugin-transform-typescript": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/core": "^7.28.0",
+    "@babel/eslint-parser": "^7.28.0",
+    "@babel/plugin-transform-typescript": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@babel/register": "^7.27.1",
