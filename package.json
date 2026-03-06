@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@hapi/hapi": "^21.4.6",
+    "@hapi/hapi": "^21.4.7",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
     "@sequencemedia/react-router-redux-render": "2.5.150",
@@ -50,15 +50,15 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/register": "^7.28.6",
-    "babel-loader": "^10.0.0",
+    "babel-loader": "^10.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.48.0",
     "eslint": "8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
-    "terser-webpack-plugin": "^5.3.16",
-    "webpack": "^5.105.3",
+    "terser-webpack-plugin": "^5.3.17",
+    "webpack": "^5.105.4",
     "webpack-cli": "^6.0.1"
   },
   "imports": {
