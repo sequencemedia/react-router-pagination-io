@@ -50,16 +50,16 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/register": "^7.28.6",
-    "babel-loader": "^10.1.0",
+    "babel-loader": "^10.1.1",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.48.0",
     "eslint": "8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
-    "terser-webpack-plugin": "^5.3.17",
+    "terser-webpack-plugin": "^5.4.0",
     "webpack": "^5.105.4",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^7.0.0"
   },
   "imports": {
     "#client/api/paginated-page": "./client/api/paginated-page/index.mjs",
