@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@hapi/hapi": "^21.4.7",
+    "@hapi/hapi": "^21.4.8",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
     "@sequencemedia/react-router-redux-render": "2.5.150",
@@ -37,7 +37,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
-    "react-router": "^7.13.2",
+    "react-router": "^7.14.0",
     "react-router-pagination": "^3.3.184",
     "redux": "^5.0.1",
     "redux-saga": "^1.4.2"
