@@ -26,7 +26,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.4.9",
-    "@hapi/inert": "^7.1.1",
+    "@hapi/inert": "^7.1.2",
     "@hapi/vision": "^7.0.3",
     "@sequencemedia/react-router-redux-render": "2.5.150",
     "cross-env": "^10.1.0",
@@ -37,7 +37,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-redux": "^9.3.0",
-    "react-router": "^7.17.0",
+    "react-router": "^8.0.0",
     "react-router-pagination": "^3.3.184",
     "redux": "^5.0.1",
     "redux-saga": "^1.5.0"
