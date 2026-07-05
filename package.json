@@ -37,7 +37,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-redux": "^9.3.0",
-    "react-router": "^8.0.1",
+    "react-router": "^8.1.0",
     "react-router-pagination": "^3.3.221",
     "redux": "^5.0.1",
     "redux-saga": "^1.5.0"
@@ -58,8 +58,8 @@
     "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
     "terser-webpack-plugin": "^5.6.1",
-    "webpack": "^5.107.2",
-    "webpack-cli": "^7.0.3"
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1"
   },
   "imports": {
     "#client/api/paginated-page": "./client/api/paginated-page/index.mjs",
