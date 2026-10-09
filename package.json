@@ -28,7 +28,7 @@
     "@hapi/hapi": "^21.4.10",
     "@hapi/inert": "^7.1.2",
     "@hapi/vision": "^7.0.3",
-    "@sequencemedia/react-router-redux-render": "2.5.199",
+    "@sequencemedia/react-router-redux-render": "2.5.200",
     "cross-env": "^10.1.0",
     "debug": "^4.4.3",
     "handlebars": "^4.7.10",
@@ -38,7 +38,7 @@
     "react-dom": "^19.3.0",
     "react-redux": "^9.3.0",
     "react-router": "^8.4.0",
-    "react-router-pagination": "^3.3.236",
+    "react-router-pagination": "^3.3.237",
     "redux": "^5.0.1",
     "redux-saga": "^1.5.1"
   },
