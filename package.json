@@ -23,6 +23,9 @@
     "start": "cross-env NODE_ENV=production node .",
     "start:dev": "cross-env NODE_ENV=development node ."
   },
+  "allowScripts": {
+    "core-js@3.51.0": true
+  },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.4.13",
@@ -84,8 +87,5 @@
     "#client/app/sagas": "./client/app/sagas/index.mjs",
     "#client/app/store": "./client/app/store/index.mjs",
     "#server/config": "./server/config/index.mjs"
-  },
-  "allowScripts": {
-    "core-js@3.51.0": true
   }
 }
